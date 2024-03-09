@@ -65,6 +65,11 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
+	public void ensureNumbersOver1000AreIgnored() throws StringCalculatorException {
+		assertEquals(15, StringCalculator.add("8,7,1001"));
+	}
+	
+	@Test
 	public void ensureNonNumericValueCausesException() {
 		try {
 			StringCalculator.add("1,a");

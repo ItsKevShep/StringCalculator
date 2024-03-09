@@ -7,6 +7,7 @@ public class StringCalculator {
 	
 	private static final List<String> DELIMITERS = new ArrayList<String>();
 	private static final String CUSTOM_DELIMITER_PREFIX = "//";
+	private static final int IGNORE_VALUES_OVER = 1000;
 	
 	static {
 		DELIMITERS.add(",");
@@ -37,7 +38,10 @@ public class StringCalculator {
 				if (numericValue < 0) {
 					invalidValues += number + ",";
 				}
-				value += numericValue;
+				
+				if (numericValue <= IGNORE_VALUES_OVER) {
+					value += numericValue;
+				}
 			}
 			catch (NumberFormatException e) {
 				throw new StringCalculatorException("Non numeric value provided");
