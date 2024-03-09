@@ -43,6 +43,28 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
+	public void ensureSingleNegativeNumberCausesException() {
+		try {
+			StringCalculator.add("1,-2");
+			fail("Expected Exception");
+		}
+		catch (StringCalculatorException e) {
+			assertEquals("Negatives not allowed: -2", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void ensureMultipleNegativeNumbersCausesException() {
+		try {
+			StringCalculator.add("1,-2,-3");
+			fail("Expected Exception");
+		}
+		catch (StringCalculatorException e) {
+			assertEquals("Negatives not allowed: -2,-3", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void ensureNonNumericValueCausesException() {
 		try {
 			StringCalculator.add("1,a");

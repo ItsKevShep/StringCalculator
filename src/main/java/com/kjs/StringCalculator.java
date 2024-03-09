@@ -30,13 +30,22 @@ public class StringCalculator {
 		}
 		
 		int value = 0;
+		String invalidValues = "";
 		for (String number : numbers.split(DELIMITERS.get(0))) {
 			try {
-				value += Integer.parseInt(number);
+				int numericValue = Integer.parseInt(number);
+				if (numericValue < 0) {
+					invalidValues += number + ",";
+				}
+				value += numericValue;
 			}
 			catch (NumberFormatException e) {
 				throw new StringCalculatorException("Non numeric value provided");
 			}
+		}
+		
+		if (!invalidValues.isEmpty()) {
+			throw new StringCalculatorException("Negatives not allowed: " + invalidValues.substring(0, invalidValues.length() - 1));
 		}
 		
 		return value;
