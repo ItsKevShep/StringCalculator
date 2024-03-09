@@ -22,12 +22,18 @@ public class StringCalculator {
 		List<String> delimiterValues = new ArrayList<String>(DELIMITERS);
 		if (numbers.startsWith(CUSTOM_DELIMITER_PREFIX)) {
 			int firstNewLine = numbers.indexOf("\n");
-			delimiterValues.add(numbers.substring(CUSTOM_DELIMITER_PREFIX.length(), firstNewLine));
+			
+			String customDelimiter = numbers.substring(CUSTOM_DELIMITER_PREFIX.length(), firstNewLine);
+			if (customDelimiter.length() > 3) {
+				customDelimiter = customDelimiter.substring(1, customDelimiter.length() - 1);
+			}
+			
+			delimiterValues.add(customDelimiter);
 			numbers = numbers.substring(firstNewLine).trim();
 		}
 		
 		for (int i = 1; i < delimiterValues.size(); ++i) {
-			numbers = numbers.replaceAll(delimiterValues.get(i), delimiterValues.get(0));
+			numbers = numbers.replace(delimiterValues.get(i), delimiterValues.get(0));
 		}
 		
 		int value = 0;
