@@ -33,6 +33,11 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
+	public void ensureNewLinesHandledAsDelimiter() throws StringCalculatorException {
+		assertEquals(6, StringCalculator.add("1,2\n3"));
+	}
+	
+	@Test
 	public void ensureNonNumericValueCausesException() {
 		try {
 			StringCalculator.add("1,a");
