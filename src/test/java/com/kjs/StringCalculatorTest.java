@@ -25,18 +25,11 @@ public class StringCalculatorTest {
 	@Test
 	public void ensureTwoValuesAreAdded() throws StringCalculatorException {
 		assertEquals(15, StringCalculator.add("8,7"));
-		
 	}
 	
 	@Test
-	public void ensureMoreThanTwoValuesCausesException() {
-		try {
-			StringCalculator.add("1,2,3");
-			fail("Expected Exception");
-		}
-		catch (StringCalculatorException e) {
-			assertEquals("More than two numbers provided", e.getMessage());
-		}
+	public void ensureMoreThanTwoValuesAreHandled() throws StringCalculatorException {
+		assertEquals(6, StringCalculator.add("1,2,3"));
 	}
 	
 	@Test
