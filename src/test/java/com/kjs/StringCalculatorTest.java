@@ -75,6 +75,11 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
+	public void ensureMultipleCustomDelimitersHandled() throws StringCalculatorException {
+		assertEquals(21, StringCalculator.add("//[||][%]\n1,2\n3,4||5%6"));
+	}
+	
+	@Test
 	public void ensureNonNumericValueCausesException() {
 		try {
 			StringCalculator.add("1,a");

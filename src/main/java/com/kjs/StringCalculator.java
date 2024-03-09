@@ -25,10 +25,13 @@ public class StringCalculator {
 			
 			String customDelimiter = numbers.substring(CUSTOM_DELIMITER_PREFIX.length(), firstNewLine);
 			if (customDelimiter.length() > 3) {
-				customDelimiter = customDelimiter.substring(1, customDelimiter.length() - 1);
+				for (String delimit : customDelimiter.split("]")) {
+					delimiterValues.add(delimit.substring(1));
+				}
 			}
-			
-			delimiterValues.add(customDelimiter);
+			else {
+				delimiterValues.add(customDelimiter);
+			}
 			numbers = numbers.substring(firstNewLine).trim();
 		}
 		
