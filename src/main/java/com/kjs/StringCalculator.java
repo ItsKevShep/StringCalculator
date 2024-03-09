@@ -6,6 +6,7 @@ import java.util.List;
 public class StringCalculator {
 	
 	private static final List<String> DELIMITERS = new ArrayList<String>();
+	private static final String CUSTOM_DELIMITER_PREFIX = "//";
 	
 	static {
 		DELIMITERS.add(",");
@@ -17,8 +18,15 @@ public class StringCalculator {
 			return 0;
 		}
 		
-		for (int i = 1; i < DELIMITERS.size(); ++i) {
-			numbers = numbers.replaceAll(DELIMITERS.get(i), DELIMITERS.get(0));
+		List<String> delimiterValues = new ArrayList<String>(DELIMITERS);
+		if (numbers.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+			int firstNewLine = numbers.indexOf("\n");
+			delimiterValues.add(numbers.substring(CUSTOM_DELIMITER_PREFIX.length(), firstNewLine));
+			numbers = numbers.substring(firstNewLine).trim();
+		}
+		
+		for (int i = 1; i < delimiterValues.size(); ++i) {
+			numbers = numbers.replaceAll(delimiterValues.get(i), delimiterValues.get(0));
 		}
 		
 		int value = 0;

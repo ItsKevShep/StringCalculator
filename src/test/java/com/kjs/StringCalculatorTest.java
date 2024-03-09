@@ -38,6 +38,11 @@ public class StringCalculatorTest {
 	}
 	
 	@Test
+	public void ensureCustomDelimiterHandled() throws StringCalculatorException {
+		assertEquals(10, StringCalculator.add("//;\n1,2\n3;4"));
+	}
+	
+	@Test
 	public void ensureNonNumericValueCausesException() {
 		try {
 			StringCalculator.add("1,a");
